@@ -1,0 +1,21 @@
+{
+    "name": "pframe/phalcon-clear",
+    "description": "一套前端与后端可以分离部署phalcon框架简明设计结构",
+    "keywords": ["framework", "phalcon-clear"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "luojinlong",
+            "email": "luojinlong@ucfgroup.com"
+        }
+    ],
+    "require": {
+        "mysqlsyn/mysqlsyn": "1.0"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.org"
+        }
+    }
+}
