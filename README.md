@@ -28,10 +28,10 @@
 ```json
    {
        "repositories": [
-          {
-              "type": "git",
-              "url": "git@10.20.104.54:yun/phalcon_base.git"
-          }
+            "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
       ],
       "require": {
            "composer/installers": "~1.0",
