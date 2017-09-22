@@ -9,6 +9,7 @@
     * 引入composer, 支持composer安装与升级phalcon-clear, 真正做到一点维护, 多点使用.
     * 支持model/server类文件实例化, 引用InitializeService/InitializeModel可实例任意model/server类文件. 建议使用,便于类文件维护.
     * 引入trait 特性, 支持controller和service端共享.
+    * 支持yar rpc 服务, 无缝对接.
 
 ### 安装说明
 #### 安装composer:
