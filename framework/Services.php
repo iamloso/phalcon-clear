@@ -39,6 +39,16 @@ $di->set ( 'url', function () use($Config) {
     return $url;
 }, true );
 
+
+/*
+ * common RPC
+ * */
+$di->set ( 'rpc', function () use($Config) {
+    $rpc = new PFrame\Libs\Extensions\YarClient ();
+    //extra param write here
+    return $rpc;
+}, true );
+
 /**
  * Setting up the view component
  */
@@ -128,6 +138,11 @@ $di->set ( 'flash', function () {
 $di->set ( 'router', function () {
     return include 'Routes.php';
 }, true );
+
+/**
+ * Loader
+ */
+$di->set ( 'loader', $loader);
 
 /**
  * Register the configuration itself as a service
