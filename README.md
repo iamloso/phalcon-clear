@@ -72,7 +72,7 @@
                 "dev-master": {
                     "name": "pframe/phalcon-clear",
                     "source": {
-                        "reference": "e2ef0d6de60e0506817469e634620e6ad553857a",
+                        "reference": "d7e6048400c3981175bc2c3c8fdadebe13369a98",
                         "type": "git",
                         "url": "git@10.20.104.54:yun/phalcon_base.git"
                     },
