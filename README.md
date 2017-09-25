@@ -93,6 +93,12 @@
 ### 已加载composer包:
     * mysqlsyn/mysqlsyn: sql语句维护
 
+### YAR RPC 使用规范
+1. 参照nginx/nginx.conf部署RPC解析.
+2. 创建Controller文件, 编写简单代码.  代码示例 rpc/controllers/TestController.php , 该文件initAction 为初始化服务重要方法. testAction 为具体服务入口.
+   编写service类, 理论上文件名/方法名,可与controller文件保存一致.
+3. 服务注册填写服务商唯一标识/服务名称/服务地址/服务参数, 示例参考libs/extensions/ServiceConfig.php
+4. 服务调用示例代码`$result = $this->rpc->request('service_merchant', 'service_name', ["test"=>'aa']);` 或 new YarClient.php
 
 
 ### 项目底层框架更新
