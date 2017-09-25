@@ -115,11 +115,14 @@
 #### 更新说明
  * Tip: 框架在项目中创建后, 下面目录及文件不在默认更新
 > * admin/config
-> * admin/view
+> * admin/views
 > * admin/public
 > * interface/config
 > * interface/views
 > * interface/public
+> * rpc/config
+> * rpc/views
+> * rpc/public
 > * static
 > * libs/common/Rsa.php
 > * libs/plugins/admin/Elements.php

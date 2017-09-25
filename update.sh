@@ -20,6 +20,8 @@ cp -Rf framework          ../$1
 cp -Rf interface/controllers   ../$1/interface
 cp -Rf interface/tasks         ../$1/interface
 #cp -Rf interface/public       ../$1/interface
+cp -Rf rpc/controllers         ../$1/interface
+cp -Rf rpc/tasks               ../$1/interface
 
 cp -Rf libs   /tmp/
 rm -rf /tmp/libs/common/apikeys
