@@ -49,7 +49,7 @@ class SLog {
     public static function config()
     {
         if (!isset( self::$config) ) {
-            self::$config = include PROJECT_PATH . '/framework/Config.php';
+            self::$config = include ROOT_PATH . '/framework/Config.php';
         }
     }
 
