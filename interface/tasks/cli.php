@@ -12,12 +12,9 @@ define ( 'APP_NAME', 'interface_task' );
 
 define ( 'PROJECT_NAME', SITE_NAME.'_'.APP_NAME);
 
-define ( 'APP_PATH', realpath ( '..' ) );
-
 define ( 'PROJECT_PATH', realpath ( '..' ) );
 
 define ( 'ROOT_PATH', APP_CLI_PATH.'/../..');
-
 $Config = include ROOT_PATH . "/framework/Config.php";
 
 $DbConfig = include PROJECT_PATH."/config/DbConfig.php";

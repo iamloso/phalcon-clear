@@ -8,8 +8,8 @@ use PFrame\Libs\Plugins\NotFoundPlugin;
 use PFrame\Libs\Plugins\VoltFilter;
 use PFrame\Libs\Plugins\ModelListener;
 
-$CenterConfig = include APP_PATH."/config/CenterConfig.php";
-$DbConfig     = include APP_PATH."/config/DbConfig.php";
+$CenterConfig = include PROJECT_PATH."/config/CenterConfig.php";
+$DbConfig     = include PROJECT_PATH."/config/DbConfig.php";
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework

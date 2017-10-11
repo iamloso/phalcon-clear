@@ -7,9 +7,7 @@ define ( 'SITE_NAME', 'product_center' );
 
 define ( 'APP_NAME', 'interface' );
 
-define ( 'APP_PATH', realpath ( '..' ) );
-
-define ( 'PROJECT_PATH', realpath ( '../..' ) );
+define ( 'PROJECT_PATH', realpath ( '..' ) );
 
 define ( 'ROOT_PATH', realpath ( '../..' ) );
 
@@ -18,17 +16,17 @@ define ( 'PROJECT_NAME', SITE_NAME.'_'.APP_NAME);
 /**
  * Read the Configuration
 */
-$Config = include PROJECT_PATH."/framework/Config.php";
+$Config = include ROOT_PATH."/framework/Config.php";
 
 /**
  * Read auto-loader
  */
-include PROJECT_PATH."/framework/Loader.php";
+include ROOT_PATH."/framework/Loader.php";
 
 /**
  * Read services
  */
-include PROJECT_PATH."/framework/Services.php";
+include ROOT_PATH."/framework/Services.php";
 
 
 try {

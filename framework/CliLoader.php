@@ -5,7 +5,6 @@
 $loader = new \Phalcon\Loader();
 
 $loader->registerNamespaces(array(
-    //'Phalcon' => ROOT_PATH . '/libs/vendor/phalcon/incubator/Library/Phalcon/',
     'PFrame\Tasks'                 => $Config->application->tasksDir,
     'PFrame\Libs\Models'           => $Config->application->modelsDir,
     'PFrame\Controllers'           => $Config->application->controllersDir,

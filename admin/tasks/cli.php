@@ -12,8 +12,6 @@ define ( 'APP_NAME', 'admin_task' );
 
 define ( 'PROJECT_NAME', SITE_NAME.'_'.APP_NAME);
 
-define ( 'APP_PATH', realpath ( '..' ) );
-
 define ( 'PROJECT_PATH', realpath ( '..' ) );
 
 define ( 'ROOT_PATH', APP_CLI_PATH.'/../..');

@@ -5,7 +5,6 @@
 $loader = new \Phalcon\Loader();
 
 $loader->registerNamespaces(array(
-    //'Phalcon'                       => ROOT_PATH . '/libs/vendor/phalcon/incubator/Library/Phalcon/',
     'PFrame\Libs\Models'           => $Config->application->modelsDir,
     'PFrame\Controllers'           => $Config->application->controllersDir,
     'PFrame\Libs\Services'         => $Config->application->serviceDir,
@@ -22,6 +21,7 @@ $loader->register();
 /**
  * 判断该项目是否自己注册命名空间
  */
-if (file_exists(APP_PATH . "/config/Loader.php")) {
-    include_once APP_PATH . "/config/Loader.php";
+if (file_exists(PROJECT_PATH . "/config/Loader.php")) {
+    include_once PROJECT_PATH . "/config/Loader.php";
 }
+
