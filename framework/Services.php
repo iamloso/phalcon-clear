@@ -73,8 +73,8 @@ $di->set ( 'view', function () use($Config) {
                 }
                 //添加自定义过滤器
                 $compiler = $volt->getCompiler();
-                //$filter = new VoltFilter();
-                //$filter->addFilters($compiler);
+                $filter = new VoltFilter();
+                $filter->addFilters($compiler);
                 return $volt;
             },
             '.phtml' => 'Phalcon\Mvc\View\Engine\Php' 

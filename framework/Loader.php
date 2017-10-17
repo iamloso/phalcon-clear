@@ -5,6 +5,7 @@
 $loader = new \Phalcon\Loader();
 
 $loader->registerNamespaces(array(
+    'Phalcon' => ROOT_PATH . '/vendor/phalcon/incubator/Library/Phalcon/',
     'PFrame\Libs\Models'           => $Config->application->modelsDir,
     'PFrame\Controllers'           => $Config->application->controllersDir,
     'PFrame\Libs\Services'         => $Config->application->serviceDir,
@@ -24,4 +25,7 @@ $loader->register();
 if (file_exists(PROJECT_PATH . "/config/Loader.php")) {
     include_once PROJECT_PATH . "/config/Loader.php";
 }
+
+require ROOT_PATH.'/vendor/autoload.php';
+
 

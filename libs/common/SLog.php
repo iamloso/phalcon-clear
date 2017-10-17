@@ -2,6 +2,7 @@
 namespace PFrame\Libs\Common;
 
 use PFrame\Libs\Common\Common;
+use PFrame\Libs\Extensions\LoggerJson;
 /**
  * 日志类
  * @author Dqcenter
@@ -46,6 +47,8 @@ class SLog {
 
     public static $config;
 
+    public static $jsonData = [];
+
     public static function config()
     {
         if (!isset( self::$config) ) {
@@ -79,19 +82,23 @@ class SLog {
             Common::mkDirs($dir);
         }
         $session = \Phalcon\DI::getDefault()->getShared('session');
-        $sessionId = "[".$session-> getId ()."] ";
         try {
             $logger = new \Phalcon\Logger\Adapter\File($filePath);
-            $formatter = new \Phalcon\Logger\Formatter\Line();
-            $formatter->setDateFormat('Y-m-d H:i:s');
+            $formatter = new LoggerJson();
+            $formatter->jsonData['session_id'] = $session->getId();
+            $formatter->jsonData['app_name']   = PROJECT_NAME;
+            $formatter->jsonData['client_ip']  = Common::getClientIp();
+            if (!empty(self::$jsonData)) {
+                $formatter->jsonData = array_merge($formatter->jsonData, self::$jsonData);
+            }
             $logger->setFormatter($formatter);
             if (is_object($msg)) {
-                $logger->log($sessionId.$msg->getMessage(),$errorType);
-                $logger->log($sessionId.$msg->getTraceAsString(),$errorType);
+                $logger->log($msg->getMessage(),$errorType);
+                $logger->log($msg->getTraceAsString(),$errorType);
             } else {
                 //$debugInfo = debug_backtrace();
                 //$msg = $debugInfo[0]['file'] . ' ('.$debugInfo[0]['line'].')' . ':'.$msg;
-                $logger->log($sessionId.$msg,$errorType);
+                $logger->log($msg,$errorType);
             }
             return true;
         } catch (\Exception $e ) {

@@ -6,7 +6,7 @@ if(!defined('TMP_PATH')) { define ( 'TMP_PATH','/tmp/');}
 
 if(!defined('PROJECT_NAME')) { define ( 'PROJECT_NAME',"project_center");}
 
-if(!defined('TMP_PATH_LOG')) { define ( 'TMP_PATH_LOG',TMP_PATH.'logs/'.PROJECT_NAME.'/');}
+if(!defined('TMP_PATH_LOG')) { define ( 'TMP_PATH_LOG',TMP_PATH.'logs/'.PROJECT_NAME.'/'.date("Y-m-d")."/");}
 
 /**
  * phalcon框架配置
@@ -27,15 +27,15 @@ return new \Phalcon\Config(array(
         'cacheDir'       =>  TMP_PATH . PROJECT_NAME.'/',
         'baseUri'        => '/',
         'staticBaseUri'  => '/assets/',
-        'debug'          => true, //调试开关
+        'debug'          => false, //调试开关
         'dbDebug'        => true, //数据库调试开关
         'profilerDebug'  => true, //性能调试开关  数据库性能需要dbDebug开关打开
     ),
 
     'logFilePath' => array(
-        'error'   => TMP_PATH_LOG.date('Y-m-d')."/".PROJECT_NAME.'_error.log',
-        'access'  => TMP_PATH_LOG.date('Y-m-d')."/".PROJECT_NAME.'_access.log',
-        'db'      => TMP_PATH_LOG.date('Y-m-d')."/".PROJECT_NAME.'_db.log',
-        'profile' => TMP_PATH_LOG.date('Y-m-d')."/".PROJECT_NAME.'_profile.log',
+        'error'   => TMP_PATH_LOG.PROJECT_NAME.'_error.log',
+        'access'  => TMP_PATH_LOG.PROJECT_NAME.'_access.log',
+        'db'      => TMP_PATH_LOG.PROJECT_NAME.'_db.log',
+        'profile' => TMP_PATH_LOG.PROJECT_NAME.'_profile.log',
     ),
 ));

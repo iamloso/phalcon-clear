@@ -33,12 +33,8 @@ class BaseController extends Controller
      */
     public function beforeExecuteRoute($dispatcher)
     {
+        $this->controllerLog('request[start]');
 
-        $params = $this->getAllParams();
-
-        $paramsJson = json_encode ($params, JSON_UNESCAPED_UNICODE);
-
-        $this->controllerLog('request start|params:'.$paramsJson);
         Common\TimerUtil::start('all');
     }
 
@@ -49,29 +45,35 @@ class BaseController extends Controller
      */
     public function afterExecuteRoute($dispatcher)
     {
+        $this->controllerLog('request[ended]');
+
         $caString = $dispatcher->getControllerName() . "/" . $dispatcher->getActionName() . " ";
 
-        Common\TimerUtil::stop('all');
-        Common\SLog::writeLog($caString . Common\TimerUtil::tree());
-        $this->controllerLog('request ended');
-
-        if ($this->config->application->profilerDebug) {
+        $Config = $this->di->get('config');
+        if ($Config->application->profilerDebug) {
             //获取所有的prifler记录结果，这是一个数组，每条记录对应一个sql语句
             $profiles = $this->di->get('profiler')->getProfiles();
+            $profileLogFile = $Config->logFilePath->profile;
             if ($profiles) {
-                $profileMsg = "\n\n******************" . $caString . " profiler begin *******************\n";
+                Common\SLog::writeLog('本请求性能调试开始', Common\SLog::DEBUG, $profileLogFile);
                 //遍历输出
-                foreach ($profiles as $profile) {
-                    $profileMsg .= "\nSQL语句: " . $profile->getSQLStatement() . "\n";
-                    $profileMsg .= "开始时间: " . $profile->getInitialTime() . "\n";
-                    $profileMsg .= "结束时间: " . $profile->getFinalTime() . "\n";
-                    $profileMsg .= "消耗时间: " . $profile->getTotalElapsedSeconds() . "\n";
+                foreach ($profiles as $key => $profile) {
+                    Common\SLog::$jsonData['query_sql'] = $profile->getSQLStatement();
+                    Common\SLog::$jsonData['sql_start_time'] = $profile->getInitialTime();
+                    Common\SLog::$jsonData['sql_end_time']   = $profile->getFinalTime();
+                    Common\SLog::$jsonData['sql_run_time']   = $profile->getTotalElapsedSeconds();
+                    Common\SLog::writeLog('本请求第'.++$key.'条sql性能分析', Common\SLog::DEBUG, $profileLogFile);
                 }
-                $profileMsg .= "\n******************" . $caString . " profiler ended *********************\n";
-                $profileLogFile = $this->config->logFilePath->profile;
-                Common\SLog::writeLog($profileMsg, Common\SLog::DEBUG, $profileLogFile);
+                Common\SLog::$jsonData = [];
+                Common\SLog::writeLog('本请求性能调试结束',Common\SLog::DEBUG, $profileLogFile);
             }
         }
+
+        Common\TimerUtil::stop('all');
+        $timeUtil = Common\TimerUtil::tree();
+        Common\SLog::$jsonData['route_path'] = $caString;
+        Common\SLog::$jsonData['run_time'] = $timeUtil['timers']['all'].'微妙';
+        Common\SLog::writeLog('access_log');
         return true;
     }
 
@@ -93,11 +95,13 @@ class BaseController extends Controller
         } else {
             $logType = Common\SLog::INFO;
         }
+        $params = $this->getAllParams();
         $className = str_replace("\\", "-", get_class($this)); //get_called_class()
-        $logPath   = TMP_PATH_LOG.date('Y-m-d').'/controller_log/'.$className.'.log';
-        $function  = $this->dispatcher->getActionName();
-        $log = $className.'::'.$function.'Action'.' '.$log;
+        $logPath   = TMP_PATH_LOG.'controller_log/'.$className.'.log';
+        Common\SLog::$jsonData['route_path'] = $params['_url'];
+        Common\SLog::$jsonData['params'] = serialize($params);
         Common\SLog::writeLog($log,$logType,$logPath);
+        //Common\SLog::$jsonData = [];
     }
 
     public function getAllParams(){

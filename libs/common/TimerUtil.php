@@ -156,7 +156,7 @@ class TimerUtil
     public static function tree ()
     {
         $struct['timers'] = self::calc(self::$_stat);
-        return json_encode($struct);
+        return $struct;
     }
 
     /**
